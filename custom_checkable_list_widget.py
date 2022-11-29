@@ -29,10 +29,6 @@ class TestDialog(QDialog):
         self.layout = QVBoxLayout(self)
         self.layout.addWidget(self.list_widget)
         
-        
-dlg = TestDialog(iface)
-dlg.show()
-
 
 class CustomCheckableListWidget(QWidget):
     '''
@@ -115,3 +111,15 @@ class CustomCheckableListWidget(QWidget):
                 selection.append(item.text())
         selection.sort()
         self.items_le.setText(', '.join(selection))
+        
+    def checked_items(self):
+        selection = []
+        for i in range(self.lw.count()):
+            item = self.lw.item(i)
+            if item.checkState() == Qt.Checked:
+                selection.append(item.text())
+        selection.sort()
+        return selection
+        
+dlg = TestDialog(iface)
+dlg.show()
